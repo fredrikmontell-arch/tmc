@@ -1056,7 +1056,7 @@
       box-shadow: 0 -30px 60px -20px rgba(0,0,0,0.6);
     }
     .corp__text {
-      max-width: 760px;
+      max-width: 920px;
       margin: 0 auto;
       text-align: center;
     }
@@ -1072,8 +1072,10 @@
       margin: 0;
       font-family: var(--font-display);
       font-weight: 800;
-      font-size: clamp(44px, 5.6vw, 96px);
-      line-height: 1.0;
+      /* Nedskalad från clamp(44px, 5.6vw, 96px): rubriken är en hel mening nu,
+         inte fyra ord, och ska landa på två rader i stället för fyra. */
+      font-size: clamp(34px, 4.2vw, 68px);
+      line-height: 1.05;
       color: var(--corp-gold);
     }
     .corp__title .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; margin-bottom: -0.08em; }
@@ -1116,10 +1118,10 @@
     .corp__actions .cta:hover, .corp__actions .cta:focus-visible { color: var(--corp-bg); box-shadow: 0 10px 30px -12px rgba(239,195,77,0.5); }
     .corp__actions .bar__link { color: var(--corp-gold); }
 
-    /* Photo row: three big frames at staggered heights, each drifting at its own pace */
+    /* Fyra akter: fyra ramar på förskjutna höjder, var och en driver i egen takt */
     .corp__photos {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 15px;
       align-items: start;
       max-width: 1600px;
@@ -1136,8 +1138,9 @@
       transition: opacity .9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1);
     }
     .corp__shot:nth-child(1) { transition-delay: .05s; }
-    .corp__shot:nth-child(2) { transition-delay: .2s; margin-top: clamp(24px, 4vw, 64px); }
-    .corp__shot:nth-child(3) { transition-delay: .35s; }
+    .corp__shot:nth-child(2) { transition-delay: .17s; margin-top: clamp(24px, 4vw, 64px); }
+    .corp__shot:nth-child(3) { transition-delay: .29s; }
+    .corp__shot:nth-child(4) { transition-delay: .41s; margin-top: clamp(24px, 4vw, 64px); }
     .corp.is-in .corp__shot { opacity: 1; transform: translateY(0); }
     .corp__shot img {
       display: block;
@@ -1153,18 +1156,47 @@
     .corp__shot figcaption {
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      padding: 16px 18px;
+      padding: clamp(34px, 3.4vw, 58px) clamp(16px, 1.4vw, 24px) clamp(15px, 1.3vw, 22px);
+      background: linear-gradient(0deg, rgba(41,44,45,0.93) 0%, rgba(41,44,45,0.72) 48%, rgba(41,44,45,0) 100%);
+    }
+    .corp__act {
+      display: block;
       font-family: var(--font-body);
-      font-size: clamp(13px, 0.95vw, 16px);
+      font-weight: 500;
+      font-size: clamp(12px, 0.9vw, 14px);
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--corp-gold);
-      background: linear-gradient(0deg, rgba(41,44,45,0.85) 0%, rgba(41,44,45,0) 100%);
+    }
+    .corp__act .n { margin-right: 0.7em; opacity: 0.65; }
+    .corp__line {
+      display: block;
+      margin-top: 0.4em;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(17px, 1.3vw, 23px);
+      line-height: 1.2;
+      color: var(--corp-cream);
+    }
+    /* Kapacitetsraden låg tidigare i brödtexten; ligger kvar men efter bilderna,
+       så att CTA:erna hamnar direkt under rubriken som kunden bad om. */
+    .corp__note {
+      margin: clamp(30px, 3.2vw, 50px) auto 0;
+      max-width: 34em;
+      text-align: center;
+      font-size: clamp(15px, 1.1vw, 19px);
+      line-height: 1.55;
+      color: var(--corp-cream);
+      opacity: 0.8;
     }
 
     @media (max-width: 900px) {
       .corp__photos { grid-template-columns: 1fr 1fr; }
-      .corp__shot:nth-child(2) { margin-top: 0; }
-      .corp__shot:nth-child(3) { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+      .corp__shot:nth-child(2), .corp__shot:nth-child(4) { margin-top: 0; }
+    }
+    @media (max-width: 520px) {
+      .corp__photos { grid-template-columns: 1fr; }
+      .corp__shot { aspect-ratio: 3 / 2; }
     }
 
     /* ---------- Footer ---------- */
@@ -1699,21 +1731,34 @@
   <section class="corp" id="foretag" aria-label="Företag och grupper">
     <div class="corp__text">
       <p class="corp__kicker reveal">Företag &amp; grupper</p>
-      <h2 class="corp__title"><span class="w"><span>En</span></span> <span class="w"><span>kväll</span></span> <span class="w"><span>som</span></span><br><span class="w"><span>sitter</span></span> <span class="w"><span>kvar.</span></span></h2>
+      <h2 class="corp__title"><span class="w"><span>Ta</span></span> <span class="w"><span>med</span></span> <span class="w"><span>ditt</span></span> <span class="w"><span>företag</span></span> <span class="w"><span>på</span></span> <span class="w"><span>en</span></span> <span class="w"><span>helkväll</span></span> <span class="w"><span>i</span></span> <span class="w"><span>fyra</span></span> <span class="w"><span>akter.</span></span></h2>
       <div class="corp__rule" aria-hidden="true"></div>
-      <p class="corp__body reveal">Kickoffen, kundkvällen eller avslutningsfesten som ska bli legendarisk. Vi sätter ihop ett paket med middag, dryck och privata studios – och tar hand om allt från första skålen till sista refrängen. Ni behöver bara dyka upp.</p>
-      <p class="corp__capacity reveal">Från 8 till 80 gäster – hela huset för större sällskap.</p>
       <div class="corp__actions reveal">
-        <a class="cta" href="#offert">Få offert</a>
+        <a class="cta" href="#offert">Boka helkvällen</a>
         <a class="bar__link" href="#foretag">Läs mer om grupp- och företagspaket</a>
       </div>
     </div>
 
     <div class="corp__photos">
-      <figure class="corp__shot" style="--drift: 5"><img src="assets/img/group-38.jpg" alt="Sällskap som samlas utanför entrén" loading="lazy"><figcaption>Ankomsten</figcaption></figure>
-      <figure class="corp__shot" style="--drift: -4"><img src="assets/img/group-42.jpg" alt="Sällskap som skålar i matsalen" loading="lazy"><figcaption>Middagen</figcaption></figure>
-      <figure class="corp__shot" style="--drift: 7"><img src="assets/img/group-27.jpg" alt="Sällskap som sjunger tillsammans under ljuskronan" loading="lazy"><figcaption>Refrängen</figcaption></figure>
+      <figure class="corp__shot" style="--drift: 5">
+        <img src="assets/img/room-1.jpg" alt="Entrén med röd matta och dörrvakt" loading="lazy">
+        <figcaption><span class="corp__act"><span class="n">01</span>Fördrinken</span><span class="corp__line">Kvällen börjar redan i dörren.</span></figcaption>
+      </figure>
+      <figure class="corp__shot" style="--drift: -4">
+        <img src="assets/img/mat-19.jpg" alt="Kocken toppar en tallrik med grillat kött" loading="lazy">
+        <figcaption><span class="corp__act"><span class="n">02</span>Middagen</span><span class="corp__line">Klassiker med signatur, fyra rätter samt dessert.</span></figcaption>
+      </figure>
+      <figure class="corp__shot" style="--drift: 7">
+        <img src="assets/img/room-105.jpg" alt="Gäst som sjunger med mikrofon i en privat studio" loading="lazy">
+        <figcaption><span class="corp__act"><span class="n">03</span>Studion</span><span class="corp__line">Sjung och skratta i en studio bara för er.</span></figcaption>
+      </figure>
+      <figure class="corp__shot" style="--drift: -5">
+        <img src="assets/img/bar-bar.jpg" alt="Tre cocktails på bardisken medan bartendern shakar" loading="lazy">
+        <figcaption><span class="corp__act"><span class="n">04</span>Baren</span><span class="corp__line">I baren tar kvällen aldrig slut.</span></figcaption>
+      </figure>
     </div>
+
+    <p class="corp__note reveal">Från 8 till 80 gäster – hela huset för större sällskap.</p>
   </section>
 
   <footer class="footer" id="footer">
