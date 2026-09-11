@@ -611,7 +611,9 @@
     .karaoke {
       position: relative;
       z-index: 7;
-      height: 240vh;
+      /* 240vh när Rummet låg efter – dess kort drev då upp över scenen under
+         slutet av pinningen. Utan det blocket blir svansen tom, därav 200vh. */
+      height: 200vh;
       background: #270D03;
       color: var(--cream);
       box-shadow: 0 -30px 60px -20px rgba(39,13,3,0.6);
@@ -1530,6 +1532,11 @@
     </div>
   </section>
 
+  <!-- AVSTÄNGD: "Lokalen"/Rummet-blocket. Ligger kvar i en <template> och renderas
+       inte (bilderna laddas inte heller). Slå på igen genom att ta bort raden
+       <template ...> nedan och den avslutande </template>, samt återställa
+       fotnotslänken "Lokalen" och .karaoke { height } (se kommentarer där). -->
+  <template id="rummet-disabled">
   <section class="room" id="rummet" aria-label="Rummet">
     <div class="room__pin">
       <div class="room__glow" aria-hidden="true"></div>
@@ -1582,6 +1589,7 @@
       </div>
     </div>
   </section>
+  </template>
 
   <section class="events" id="aktuellt" aria-label="Aktuellt och event">
     <div class="events__grid" id="evTrack">
@@ -1741,7 +1749,7 @@
             <li><a href="#restaurangen">Restaurangen</a></li>
             <li><a href="#baren">Cocktailbaren</a></li>
             <li><a href="#karaoke">Karaoke</a></li>
-            <li><a href="#rummet">Lokalen</a></li>
+            <!-- <li><a href="#rummet">Lokalen</a></li> --> <!-- av: sektionen Rummet är avstängd -->
             <li><a href="#aktuellt">Aktuellt</a></li>
             <li><a href="#foretag">Företag &amp; grupper</a></li>
             <li><a href="#boka-bord">Boka</a></li>
@@ -2016,7 +2024,8 @@
 
       /* ---------- Rummet: pinned text, drifting cards ---------- */
       var room = document.getElementById('rummet');
-      function updateRoom() {
+      if (room) {
+      var updateRoom = function () {
         var r = room.getBoundingClientRect();
         var vh = window.innerHeight;
         var total = r.height - vh;                 // scroll distance while pinned
@@ -2026,10 +2035,11 @@
         var p = raw < 0 ? Math.max(-0.7, raw * 0.6) : Math.min(1, raw);
         room.style.setProperty('--room-p', p.toFixed(4));
         if (r.top < vh * 0.6 && !room.classList.contains('is-in')) room.classList.add('is-in');
-      }
+      };
       window.addEventListener('scroll', function () { requestAnimationFrame(updateRoom); }, { passive: true });
       window.addEventListener('resize', updateRoom);
       updateRoom();
+      }
 
       /* ---------- Aktuellt: drag-to-scroll (same feel as Restaurangen) ---------- */
       (function makeDraggable(el) {
