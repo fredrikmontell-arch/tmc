@@ -904,6 +904,9 @@
     /* Draggable row of teasers; ~4 in view, the next one peeks in at the edge */
     .events__grid {
       --ev-gap: clamp(16px, 1.8vw, 28px);
+      /* Bredden på en vanlig puff. Ligger som variabel för att .ev--lead ska
+         kunna räkna ut "två puffar + mellanrum" på varje brytpunkt. */
+      --ev-w: calc((100vw - var(--pad-x) * 2 - var(--ev-gap) * 3) / 4.35);
       display: flex;
       gap: var(--ev-gap);
       margin: 0 calc(var(--pad-x) * -1);
@@ -922,7 +925,7 @@
     .ev {
       display: block;
       flex: none;
-      width: calc((100vw - var(--pad-x) * 2 - var(--ev-gap) * 3) / 4.35);
+      width: var(--ev-w);
       color: inherit;
     }
     .ev img { -webkit-user-drag: none; }
@@ -1034,12 +1037,24 @@
     .ev:hover .ev__link::after { transform: scaleX(1); }
     .ev:focus-visible { outline: 1.5px solid var(--ev-gold); outline-offset: 6px; }
 
+    /* Senaste puffen lyfts fram: två puffar bred, men mediahöjden låst till
+       de vanliga puffarnas så att hela raden står på samma linje. Under 641px
+       finns inte utrymmet – då är den en vanlig puff igen. */
+    @media (min-width: 641px) {
+      .ev--lead { width: calc(var(--ev-w) * 2 + var(--ev-gap)); }
+      .ev--lead .ev__media { aspect-ratio: auto; height: calc(var(--ev-w) * 1.25); }
+      .ev--lead .ev__date { top: 18px; left: 18px; }
+      .ev--lead .ev__date b { font-size: clamp(26px, 2.3vw, 40px); }
+      .ev--lead .ev__title { font-size: clamp(28px, 2.6vw, 42px); }
+      .ev--lead .ev__meta { font-size: clamp(14px, 1.1vw, 18px); }
+      .ev--lead .ev__text { font-size: clamp(16px, 1.2vw, 20px); max-width: 42em; }
+    }
+
     @media (max-width: 1100px) {
-      .ev { width: calc((100vw - var(--pad-x) * 2 - var(--ev-gap)) / 2.3); }
+      .events__grid { --ev-w: calc((100vw - var(--pad-x) * 2 - var(--ev-gap)) / 2.3); }
     }
     @media (max-width: 640px) {
-      .events__grid { gap: 14px; }
-      .ev { width: 76vw; }
+      .events__grid { gap: 14px; --ev-w: 76vw; }
     }
 
     /* ---------- Företag & grupper (B2B) ---------- */
@@ -1625,7 +1640,7 @@
 
   <section class="events" id="aktuellt" aria-label="Aktuellt och event">
     <div class="events__grid" id="evTrack">
-      <a class="ev reveal" href="#event-live">
+      <a class="ev ev--lead reveal" href="#event-live">
         <div class="ev__media">
           <span class="ev__date" aria-hidden="true"><b>19</b><span>sep</span></span>
           <img src="assets/img/event-live.jpg" alt="Artist i paljettkavaj på scenen i lila strålkastarljus" loading="lazy">
