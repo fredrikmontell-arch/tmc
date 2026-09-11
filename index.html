@@ -117,11 +117,12 @@
     .logo {
       display: block;
       width: clamp(96px, 7.4vw, 124px);
-      color: var(--gold);
       transition: transform .5s cubic-bezier(.2,.7,.2,1);
     }
     .logo:hover { transform: translateY(-1px); }
-    .logo svg { width: 100%; height: auto; overflow: visible; }
+    /* height: auto mot width/height-attributen ger filens egna proportioner
+       (1000x595) utan att något behöver hårdkodas här. */
+    .logo img { display: block; width: 100%; height: auto; }
 
     /* ---------- Meny: fixerad knapp + dropdown ---------- */
     .menu {
@@ -1292,8 +1293,8 @@
       max-width: 1600px;
       margin: 0 auto;
     }
-    .footer__logo { display: block; width: clamp(110px, 8.6vw, 150px); color: var(--gold); }
-    .footer__logo svg { width: 100%; height: auto; overflow: visible; }
+    .footer__logo { display: block; width: clamp(110px, 8.6vw, 150px); }
+    .footer__logo img { display: block; width: 100%; height: auto; }
     .footer__brand { display: flex; align-items: center; gap: clamp(22px, 2.4vw, 40px); align-self: start; }
     .footer .city { margin: 0; }
     .footer .city__menu { bottom: auto; top: calc(100% + 12px); transform: translateY(-8px); z-index: 5; background: rgba(26,14,16,0.94); }
@@ -1429,13 +1430,6 @@
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <!-- Framed "The Melody Club" mark -->
-      <symbol id="tmc-logo" viewBox="0 0 200 112">
-        <path d="M70 25 H3 V109 H197 V25 H130" fill="none" stroke="currentColor" stroke-width="2.6"/>
-        <text x="100" y="33" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="34" fill="currentColor">The</text>
-        <text x="100" y="72" text-anchor="middle" font-family="'Bodoni Moda', 'Playfair Display', serif" font-weight="600" font-size="33" fill="currentColor">MELODY</text>
-        <text x="100" y="101" text-anchor="middle" font-family="'Bodoni Moda', 'Playfair Display', serif" font-weight="600" font-size="29" fill="currentColor">CLUB</text>
-      </symbol>
       <!-- Icons from the asset folder (musical-note.svg, cutlery.svg) -->
       <symbol id="ico-note" viewBox="0 0 512 512">
         <path d="m512 166.851v-59.852c0-5.042-2.533-9.747-6.742-12.522-4.211-2.776-9.532-3.251-14.167-1.265l-210 90c-5.515 2.364-9.091 7.787-9.091 13.787v206.894c-12.894-7.702-28.583-11.894-45-11.894-19.251 0-37.515 5.746-51.426 16.18-14.981 11.236-23.574 27.208-23.574 43.82s8.593 32.584 23.574 43.82c13.911 10.434 32.175 16.18 51.426 16.18s37.515-5.746 51.426-16.18c14.981-11.236 23.574-27.208 23.574-43.82v-185.109l180-77.143v124.146c-12.894-7.702-28.583-11.894-45-11.894-19.251 0-37.515 5.746-51.426 16.18-14.981 11.236-23.574 27.208-23.574 43.82s8.593 32.584 23.574 43.82c13.911 10.434 32.175 16.18 51.426 16.18s37.515-5.746 51.426-16.18c14.981-11.236 23.574-27.208 23.574-43.82 0 0 0-195.096 0-195.148zm-285 315.148c-24.393 0-45-13.738-45-30s20.607-30 45-30 45 13.738 45 30-20.607 30-45 30zm75-247.748v-27.361l180-77.143v27.361zm135 157.748c-24.393 0-45-13.738-45-30s20.607-30 45-30 45 13.738 45 30-20.607 30-45 30z"/>
@@ -1509,7 +1503,7 @@
     <div class="hero__inner">
     <header class="hero__header">
       <a class="logo" href="#" aria-label="The Melody Club – startsida">
-        <svg viewBox="0 0 200 112" role="img" aria-hidden="true"><use href="#tmc-logo"/></svg>
+        <img src="assets/img/tmc-logo.png" alt="" width="1000" height="595">
       </a>
     </header>
 
@@ -1863,7 +1857,7 @@
     <div class="footer__inner">
       <div class="footer__brand">
         <a class="footer__logo" href="#hero" aria-label="The Melody Club – till toppen">
-          <svg viewBox="0 0 200 112" aria-hidden="true"><use href="#tmc-logo"/></svg>
+          <img src="assets/img/tmc-logo.png" alt="" width="1000" height="595">
         </a>
 
         <div class="city">
