@@ -1112,14 +1112,6 @@
       line-height: 1.55;
       color: var(--corp-cream);
     }
-    .corp__capacity {
-      margin: clamp(14px, 1.4vw, 22px) auto 0;
-      max-width: 34em;
-      font-size: clamp(16px, 1.2vw, 20px);
-      line-height: 1.55;
-      color: var(--corp-cream);
-      opacity: 0.85;
-    }
     .corp__actions {
       display: flex;
       align-items: center;
@@ -1193,6 +1185,48 @@
       line-height: 1.2;
       color: var(--corp-cream);
     }
+    /* Kontaktrad under bilderna: porträtt + vem man ringer */
+    .corp__contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 2vw, 34px);
+      max-width: 760px;
+      margin: clamp(46px, 4.8vw, 76px) auto 0;
+      text-align: left;
+    }
+    .corp__portrait {
+      flex: none;
+      width: clamp(96px, 9.5vw, 148px);
+      height: clamp(96px, 9.5vw, 148px);
+      border-radius: 50%;
+      object-fit: cover;
+      /* Cirkeln och guldringen ritas av CSS, så ramen står rätt även innan
+         porträttet finns på plats. Bilden behöver bara vara kvadratisk. */
+      background: rgba(255,253,235,0.07);
+      box-shadow: 0 0 0 1px rgba(239,195,77,0.5);
+    }
+    .corp__contact-line {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(20px, 1.8vw, 30px);
+      line-height: 1.2;
+      color: var(--corp-cream);
+    }
+    .corp__contact-meta {
+      margin: 0.55em 0 0;
+      font-size: clamp(14px, 1.05vw, 17px);
+      line-height: 1.5;
+      color: var(--corp-cream);
+      opacity: 0.85;
+    }
+    .corp__contact-meta .bar__link { font-size: inherit; color: var(--corp-gold); }
+
+    @media (max-width: 520px) {
+      .corp__contact { flex-direction: column; text-align: center; gap: 18px; }
+    }
+
     /* Kapacitetsraden låg tidigare i brödtexten; ligger kvar men efter bilderna,
        så att CTA:erna hamnar direkt under rubriken som kunden bad om. */
     .corp__note {
@@ -1201,8 +1235,9 @@
       text-align: center;
       font-size: clamp(15px, 1.1vw, 19px);
       line-height: 1.55;
-      color: var(--corp-cream);
-      opacity: 0.8;
+      /* Dämpningen ligger i färgen, inte i opacity: .reveal animerar opacity
+         från 0 till 1 och en egen opacity här hade tagit över den. */
+      color: rgba(255, 253, 235, 0.8);
     }
 
     @media (max-width: 900px) {
@@ -1771,6 +1806,15 @@
         <img src="assets/img/bar-bar.jpg" alt="Tre cocktails på bardisken medan bartendern shakar" loading="lazy">
         <figcaption><span class="corp__act"><span class="n">04</span>Baren</span><span class="corp__line">I baren tar kvällen aldrig slut.</span></figcaption>
       </figure>
+    </div>
+
+    <div class="corp__contact reveal">
+      <!-- Kvadratisk bild räcker, CSS gör den rund. Byt filnamn här om den heter något annat. -->
+      <img class="corp__portrait" src="assets/img/claes-johansson.jpg" alt="Claes Johansson" width="296" height="296" loading="lazy">
+      <div>
+        <p class="corp__contact-line">Kontakta Claes för företags- och gruppbokningar</p>
+        <p class="corp__contact-meta">Claes Johansson · <a class="bar__link" href="mailto:goteborg@themelodyclub.se">goteborg@themelodyclub.se</a></p>
+      </div>
     </div>
 
     <p class="corp__note reveal">Från 8 till 80 gäster – hela huset för större sällskap.</p>
